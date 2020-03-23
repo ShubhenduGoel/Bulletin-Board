@@ -6,6 +6,8 @@ class Boards extends CI_Controller
 	function __construct()
 	{
 		parent:: __construct();
+		if(!$this->session->userdata('username'))
+			redirect('login');
 		$this->load->model('boards_model','b');
 	}
 	function index()

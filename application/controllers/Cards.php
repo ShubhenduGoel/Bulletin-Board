@@ -6,6 +6,8 @@ class Cards extends CI_Controller
 	function __construct()
 	{
 		parent:: __construct();
+		if(!$this->session->userdata('username'))
+			redirect('login');
 		$this->load->model('lists_model','l');
 		$this->load->model('cards_model','c');
 	}

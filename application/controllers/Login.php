@@ -7,7 +7,7 @@ class Login extends CI_Controller
 	{
 		parent::__construct();
 		if($this->session->userdata('username'))
-			redirect('dashboard');
+			redirect('dashboard/index');
 	}
 	function index()
 	{
@@ -31,6 +31,7 @@ class Login extends CI_Controller
 			{
 				$this->session->set_flashdata('pass','<div class="alert alert-danger">Login Failed</div>');
 				$this->index();
+				$this->session->set_flashdata('pass','');
 			}
 		}
 		else
@@ -50,11 +51,13 @@ class Login extends CI_Controller
 				$this->db->query("insert into users values('$username','$password')");
 				$this->session->set_flashdata('pass','<div class="alert alert-success">Signup Successfull.<br>Kindly Login</div>');
 				$this->index();	
+				$this->session->set_flashdata('pass','');
 			}
 			else
 			{
 				$this->session->set_flashdata('pass','<div class="alert alert-danger">Sorry UserName already in use.<br>Kindly try another one.</div>');
 				$this->index();
+				$this->session->set_flashdata('pass','');
 			}
 		}
 		else

@@ -5,6 +5,8 @@ class Userportal extends CI_Controller
 	function __construct()
 	{
 		parent:: __construct();
+		if(!$this->session->userdata('username'))
+			redirect('login');
 		$this->load->model('login_model','l');
 	}
 	function index()
@@ -27,16 +29,17 @@ class Userportal extends CI_Controller
 				$this->db->query("update users set password='$new_pass' where username='$username'");
 				$this->session->set_flashdata('pass','<div class="alert alert-success">Password Changed Successfully!!</div>');	
 				$this->index();
+				$this->session->set_flashdata('pass','');
 			}
 			else
 			{
 				$this->session->set_flashdata('pass','<div class="alert alert-danger">Sorry!! You did not enter your current password Correctly. Please try again !!</div>');
 				$this->index();
+				$this->session->set_flashdata('pass','');
 			}
 		}
 		else
 			$this->index();
 	}
 }
-
 ?>

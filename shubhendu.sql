@@ -37,7 +37,6 @@ CREATE TABLE `boards` (
 
 LOCK TABLES `boards` WRITE;
 /*!40000 ALTER TABLE `boards` DISABLE KEYS */;
-INSERT INTO `boards` VALUES (4,'shubhendu','Micro Processor',0),(7,'abc','abc',1),(18,'101703633','Data Structures',0),(22,'shubhendu','Data Structures',0),(23,'abc','Data Structures',0);
 /*!40000 ALTER TABLE `boards` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -63,7 +62,6 @@ CREATE TABLE `cards` (
 
 LOCK TABLES `cards` WRITE;
 /*!40000 ALTER TABLE `cards` DISABLE KEYS */;
-INSERT INTO `cards` VALUES ('Data Structures','To Do','Data Structures',0,'medium'),('Hello','To Do','Data Structures',0,'Low'),('aaa','To Do','Data Structures',0,'High');
 /*!40000 ALTER TABLE `cards` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -87,7 +85,6 @@ CREATE TABLE `lists` (
 
 LOCK TABLES `lists` WRITE;
 /*!40000 ALTER TABLE `lists` DISABLE KEYS */;
-INSERT INTO `lists` VALUES ('To Do','Data Structures',0),('In Progress','Data Structures',0);
 /*!40000 ALTER TABLE `lists` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -109,7 +106,6 @@ CREATE TABLE `temp` (
 
 LOCK TABLES `temp` WRITE;
 /*!40000 ALTER TABLE `temp` DISABLE KEYS */;
-INSERT INTO `temp` VALUES ('101703633'),('shubhendu'),('abc');
 /*!40000 ALTER TABLE `temp` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -131,7 +127,6 @@ CREATE TABLE `temp1` (
 
 LOCK TABLES `temp1` WRITE;
 /*!40000 ALTER TABLE `temp1` DISABLE KEYS */;
-INSERT INTO `temp1` VALUES ('stuti');
 /*!40000 ALTER TABLE `temp1` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -155,7 +150,6 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES ('shubhendu','81dc9bdb52d04dc20036dbd8313ed055',NULL),('stuti','81dc9bdb52d04dc20036dbd8313ed055',NULL),('101703633','81dc9bdb52d04dc20036dbd8313ed055',NULL),('abc','900150983cd24fb0d6963f7d28e17f72',NULL),('shubhendugoel','a3f83e59e8141cc43cdd883d434e132f','smartyshubhendu@gmail.com');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -168,4 +162,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-03-25 13:40:49
+-- Dump completed on 2020-03-25 13:42:54

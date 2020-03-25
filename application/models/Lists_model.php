@@ -29,6 +29,14 @@ class Lists_model extends CI_Model
 		$query=$this->db->get('cards');
 		return 	$query->result_array();
 	}	
+	function get_users($name)
+	{
+		$user=$this->session->userdata('username');
+		$this->db->like('username',$name);
+		$this->db->where('username != ',$user);
+		$query=$this->db->get('users');
+		return $query->result_array();
+	}
 	function get_lists($board)
 	{
 		$this->db->where('board',$board);

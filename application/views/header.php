@@ -67,6 +67,10 @@ a:hover
 {
   text-align: center;
 }
+#pad
+{
+  padding:10px;
+}
 </style>
 <div class="container-fluid" id="tc">
 

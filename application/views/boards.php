@@ -28,19 +28,20 @@
 </div>
 <div class="col-sm-1">
 </div>
-<div class="col-sm-8">
-<h3>Your existing Bulletin Boards.</h3>
+<div class="col-sm-8" id="pad" >
+<div style="border:10px solid;">
+<h3>Regular Bulletin Boards.</h3>
 <?php echo form_open_multipart('boards/loadboard'); ?>
      <input type='text' name='search' minlength="0" maxlength="10">
-     <input type='submit' class="btn btn-success" name='submit' value='Submit'>
+     <input type='submit' class="btn btn-success" name='submit' value='Search'>
  </form> 
 <table class="table table-stripped">
  <h4>
  <thead>
  <tr style="font-weight: bold;">
- <td><h4>Board ID</h4></td>
  <td><h4>Name</h4></td>
  <td><h4>Actions</h4></td>
+ <td><h4>Delete</h4></td>
  </tr>
  </thead>
  </h4>
@@ -53,7 +54,6 @@
 		<tr id="yellow">
 		<?php
 				echo " 
-			<td ><h4>  ".$i." </h4> </td>
 		 	<td> <h4> " .$value['name']." </h4> </td>
 		
 		";?>
@@ -66,19 +66,23 @@
 		<input type="hidden" name="name" value="<?php  echo $value['name'];?>"/>
 		<button type="submit" class="btn btn-success" />Add Member</button>
 		</form>-->
+		
+		<?php echo form_open_multipart('boards/archive'); ?>
+		<input type="hidden" name="name" value="<?php  echo $value['name'];?>"/>
+		<button type="submit" class="btn btn-info">Archive</button>
+		</form>
+			<?php echo form_open_multipart('boards/members'); ?>
+		<input type="hidden" name="name" value="<?php  echo $value['name'];?>"/>
+		<button type="submit" class="btn btn-success">Add Member</button>
+		</form>
+		</td>
+		<td>
 		<?php echo form_open_multipart('boards/delete_board'); ?>
 		<input type="hidden" name="name" value="<?php  echo $value['name'];?>"/>
 		<button type="submit"  class="btn btn-danger" />Delete</button>
 		</form>
-		<?php echo form_open_multipart('boards/archive'); ?>
-		<input type="hidden" name="name" value="<?php  echo $value['name'];?>"/>
-		<button type="submit" class="btn btn-info">Move to Archives</button>
-		</form>
-		<!--<?php echo form_open_multipart('boards/remove_member'); ?>
-		<input type="hidden" name="name" value="<?php  echo $value['name'];?>"/>
-		<button type="submit" class="btn btn-danger">Remove Member</button>
-		</form>-->
 		</td>
+	
 		</tr>
 		<?php
 		$i++;
@@ -92,5 +96,6 @@
 </div>
 <div class="container-fluid">
 <div class="row">
+</div>
 </div>
 </div>

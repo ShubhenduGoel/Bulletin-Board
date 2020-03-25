@@ -31,12 +31,12 @@
 <div class="col-sm-1">
 </div>
 <div class="col-sm-8">
-<h3>Your Archived Bulletin Boards.</h3> 
+<div style="border:10px solid;">
+<h3>Archived Bulletin Boards.</h3> 
 <table class="table table-stripped">
  <h4>
  <thead>
  <tr style="font-weight: bold;">
- <td><h4>Board ID</h4></td>
  <td><h4>Name</h4></td>
  <td><h4>Actions</h4></td>
  </tr>
@@ -51,8 +51,7 @@
 		<tr id="yellow">
 		<?php
 				echo " 
-			<td ><h4>  ".$i." </h4> </td>
-		 	<td> <h4> " .$value['name']." </h4> </td>
+			<td> <h4> " .$value['name']." </h4> </td>
 		
 		";?>
 		<td>
@@ -65,6 +64,12 @@
 		<?php
 		$i++;
 	}
+	if($i==1)
+	{
+      echo "<tr>";
+      echo "<td colspan='3' class='alert alert-info'><h3>No record found.</h3></td>";
+      echo "</tr>";
+    }
 ?>
 </tbody>
 
@@ -74,5 +79,6 @@
 </div>
 <div class="container-fluid">
 <div class="row">
+</div>
 </div>
 </div>

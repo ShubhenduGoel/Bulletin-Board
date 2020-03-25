@@ -4,7 +4,7 @@
 <div class="row" id="tc">
 <?php $board=$this->session->userdata('board'); ?>
 <?php $list=$this->session->userdata('list'); ?>
-<div id="pad" style=" width:50%;margin-left:25%;">
+<div id="pad" style="width:50%;margin-left:25%;">
 <h3 class="text-success">Page Information</h3>
 <h4 class="text-info">
 <table class="table table-stripped" style= "margin-left: 25%;width:50%;">
@@ -19,48 +19,28 @@
 <div class="col-sm-3" style="border:10px solid;">
 <div class="row" id="pad">
 <div class="form-popup" id="myForm">
-  <?php echo form_open_multipart('lists/index'); ?>
-    <button type="submit" class="btn btn-info">Go Back to Lists</button> 
+  <?php echo form_open_multipart('cards/index'); ?>
+    <button type="submit" class="btn btn-info">Go Back to Cards</button> 
   </form>
 </div>
 </div>
 <div class="row" id="pad">
-<?php $board=$this->session->userdata('board'); ?>
-<h3 >Create a new card.</h3> 
-<div class="form-popup" id="myForm">
-  <?php echo form_open_multipart('cards/create_card'); ?>
-
-    <input type="text" placeholder="Enter Name" name="name"  minlength="3" maxlength="15" required>
-    <h4>Set Priority</h4>
-<select name="imp">
-  <option value="Low">LOW</option>
-  <option value="Medium">MEDIUM</option>
-  <option value="High">HIGH</option>
-</select>
-    <button type="submit" class="btn btn-success">GO</button>
-  </form>    
-</div>
+<?php $board=$this->session->userdata('board'); ?> 
 </div> 
 <div class="row" id="pad">
-<h3 >View Regular cards.</h3> 
-<div class="form-popup" id="myForm">
-  <?php echo form_open_multipart('cards/index'); ?>
-    <button type="submit" class="btn btn-success">View</button>    
-  </form>
-</div>
 </div>
 </div>
 <div class="col-sm-1">
 </div>
 <div class="col-sm-8" style="border:10px solid;">
- <h3> Archived Cards.</h3>
+ <h3> Available Lists to move Cards.</h3>
  <table class="table table-stripped">
  <h4>
  <thead>
  <tr style="font-weight: bold;">
  <td><h4>Sr. No</h4></td>
  <td><h4>Name</h4></td>
- <td><h4>Actions</h4></td>
+ <td><h4>Move</h4></td>
  </tr>
  </thead>
  </h4>
@@ -75,13 +55,13 @@
 				echo " 
 			<td ><h4>  ".$i." </h4> </td>
 		 	<td> <h4> " .$value['name']." </h4> </td>
-		
 		";
 		?>
  		<td>
- 		<?php echo form_open_multipart('cards/unarchive'); ?>
+ 		<?php echo form_open_multipart('cards/move'); ?>
 		<input type="hidden" name="name" value="<?php  echo $value['name'];?>"/>
-		<button type="submit" class="btn btn-primary" />Unarchive</button>
+
+		<button type="submit" class="btn btn-primary" />MOVE</button>
 		</form>
 		</td>
  		</tr>

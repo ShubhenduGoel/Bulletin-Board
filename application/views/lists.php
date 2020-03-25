@@ -1,27 +1,40 @@
-<title>Boards</title>
+<title>Lists</title>
 <body id="mustard">
 <div class="container-fluid" id="brn">
 <div class="row" id="tc">
 <?php $board=$this->session->userdata('board'); ?>
-<h3 class="text-info">
-You are Currently editing Bulletin for <?php echo $board; ?>
-</h3>
-<h3><?php echo $this->session->flashdata('create');?></h3>
+<div id="pad" style=" width:50%;margin-left:25%;">
+<h3 class="text-success">Page Information</h3>
+<h4 class="text-info">
+<table class="table table-stripped" style= "margin-left: 25%;width:50%;">
+<thead><tr><td>BULLETIN</td><td><?php echo $board; ?></td></tr></thead>
+</table>
+</h4>
 </div>
+</div>
+<h3><?php echo $this->session->flashdata('create');?></h3>
 <div class="row" id="tc">
-<div class="col-sm-3" >
-<div class="row">
+<div class="col-sm-3" style="border:10px solid;">
+<div class="row" id="pad">
+<div class="form-popup" id="myForm">
+  <?php echo form_open_multipart('boards/index'); ?>
+    <button type="submit" class="btn btn-info">Go Back to Boards</button> 
+  </form>
+</div>
+</div>
+<div class="row" id="pad">
 <?php $board=$this->session->userdata('board'); ?>
 <h3 >Create a new List.</h3> 
 <div class="form-popup" id="myForm">
   <?php echo form_open_multipart('lists/create_list'); ?>
 
-    <input type="text" placeholder="Enter Name" name="name"  minlength="3" maxlength="15" required>
+    <input type="text" placeholder="Enter Name" name="name"  minlength="3" maxlength="15" class="form-control input-lg " required><br>
     <button type="submit" class="btn btn-success">GO</button>
   </form>    
 </div>
-</div> 
-<div class="row">
+</div>
+ 
+<div class="row" id="pad">
 <h3 >View Archived lists.</h3> 
 <div class="form-popup" id="myForm">
   <?php echo form_open_multipart('lists/view_archive'); ?>
@@ -32,8 +45,8 @@ You are Currently editing Bulletin for <?php echo $board; ?>
 </div>
 <div class="col-sm-1">
 </div>
-<div class="col-sm-8">
- <h3>Your existing Lists.</h3>
+<div class="col-sm-8" style="border:10px solid;">
+ <h3>Regular Lists.</h3>
  <table class="table table-stripped">
  <h4>
  <thead>
@@ -41,8 +54,8 @@ You are Currently editing Bulletin for <?php echo $board; ?>
  <td><h4>Sr. No</h4></td>
  <td><h4>Name</h4></td>
  <td><h4>Actions</h4></td>
- </tr>
- </thead>
+ <td><h4>Delete</h4></td>
+ </trd>
  </h4>
 <tbody>
  	<?php 
@@ -67,6 +80,8 @@ You are Currently editing Bulletin for <?php echo $board; ?>
 		<input type="hidden" name="name" value="<?php  echo $value['name'];?>"/>
 		<button type="submit" class="btn btn-primary" />Archive</button>
 		</form>
+		</td>
+		<td>
 		<?php echo form_open_multipart('lists/delete_list'); ?>
 		<input type="hidden" name="name" value="<?php  echo $value['name'];?>"/>
 		<button type="submit" class="btn btn-danger" />Delete</button>
@@ -74,8 +89,9 @@ You are Currently editing Bulletin for <?php echo $board; ?>
  		</td>
  		</tr>
  		<?php
+ 			$i++; 
  		}
- 		$i++; 
+ 	
  	 ?>
 </tbody>
 </table>

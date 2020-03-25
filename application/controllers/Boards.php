@@ -91,18 +91,12 @@ class Boards extends CI_Controller
 		$this->session->set_userdata('board',$name);
 		redirect('lists/index');	
 	}
-	function add_member()
-	{
-				
-	}
-	function remove_member()
-	{
-		
-	}
 	function delete_board()
 	{
 		$name=$this->input->post('name');
 		$this->db->query("delete from boards where name='$name'");
+		$this->db->query("delete from lists where board='$name'");
+		$this->db->query("delete from cards where board='$name'");
 		$this->session->set_flashdata('create','<div class="alert alert-danger">DELETED SUCCESSFULLY.</div>');
 		$this->index();
 		$this->session->set_flashdata('create','');
@@ -123,5 +117,46 @@ class Boards extends CI_Controller
 		$this->view_archive();
 		$this->session->set_flashdata('create','');
 	}
+	function members()
+	{
+		$name=$this->input->post('name');
+		$this->session->set_userdata('board',$name);
+		$this->db->query("drop table if exists temp");
+		$this->db->query("create table temp(username varchar(30));");
+		$name=$this->session->userdata('board');
+		$this->db->query("insert into temp select owner from boards where name='$name'"); 
+		$this->db->query("drop table if exists temp1");
+		$this->db->query("create table temp1(username varchar(30));");
+		$this->db->query("insert into temp1 select users.username from users left join temp on temp.username =users.username where temp.username is null");
+		$query=$this->db->query("select * from temp1");
+		$a['result']=$query->result_array();
+		$this->load->view('header');
+		$this->load->view('navigation');
+		$this->load->view('boards_3',$a);
+		$this->load->view('footer');	
+	}
+	function add_member()
+	{
+		$name=$this->input->post('name');
+		$brd=$this->session->userdata('board');
+		$this->db->query("insert into boards(owner,name) values('$name','$brd')");
+		$this->db->query("drop table if exists temp");
+		$this->db->query("create table temp(username varchar(30));");
+		$brd=$this->session->userdata('board');
+		$this->db->query("insert into temp select owner from boards where name='$brd'"); 
+		$this->db->query("drop table if exists temp1");
+		$this->db->query("create table temp1(username varchar(30));");
+		$this->db->query("insert into temp1 select users.username from users left join temp on temp.username =users.username where temp.username is null");
+		$query=$this->db->query("select * from temp1");
+		$a['result']=$query->result_array();
+		$this->load->view('header');
+		$this->load->view('navigation');
+		$this->session->set_flashdata('create','<div class="alert alert-success">Added Successfully.</div>');
+		$this->load->view('boards_3',$a);
+		$this->load->view('footer');	
+		$this->session->set_flashdata('create','');
+	}
+
+
 }
 ?>

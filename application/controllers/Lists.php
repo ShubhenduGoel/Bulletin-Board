@@ -19,6 +19,29 @@ class Lists extends CI_Controller
 		$this->load->view('lists',$a);
 		$this->load->view('footer');
 	}
+	function show_members()
+	{
+		$this->load->view('header');
+		$this->load->view('navigation');
+		$name=$this->input->post('name');
+		$a['result']=$this->l->get_users($name);
+		$this->session->set_userdata('member_search',$name);
+		$this->load->view('lists_2',$a);
+		$this->load->view('footer');
+	}
+	function add_member()
+	{
+		$board=$this->session->userdata('board');
+		$user=$this->input->post('name');
+		$name=$this->input->post('search_name');
+		$this->db->query("insert into boards(owner,name) values('$user','$board')");
+		$this->load->view('header');
+		$this->load->view('navigation');
+		$a['result']=$this->l->get_users($name);
+		$this->session->set_userdata('member_search',$name);
+		$this->load->view('lists_2',$a);
+		$this->load->view('footer');
+	}
 	function edit_list()
 	{
 		$board=$this->session->userdata('board');	
@@ -31,7 +54,8 @@ class Lists extends CI_Controller
 		$board=$this->session->userdata('board');	
 		$name=$this->input->post('name');
 		$this->db->query("delete from lists where name='$name' and board='$board'");
-		$this->session->set_flashdata('create','<div class="alert alert-danger">DELETED SUCCESSFULLY.</div>');
+		$this->db->query("delete from cards where list='$name' and board='$board'");
+		$this->session->set_flashdata('create','<div class="alert alert-danger">Deleted Successfully.</div>');
 		$this->index();
 		$this->session->set_flashdata('create','');	
 	}

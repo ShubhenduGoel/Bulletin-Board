@@ -27,9 +27,10 @@ class Cards extends CI_Controller
 		$board=$this->session->userdata('board');
 		$list=$this->session->userdata('list');
 		$name=$this->input->post('name');
+		$imp=$this->input->post('imp');
 		if($this->l->can_create_card($name,$list,$board)==true)
 		{
-			$this->db->query("insert into cards values('$name','$list' ,'$board',0)");
+			$this->db->query("insert into cards values('$name','$list' ,'$board',0,'$imp')");
 			$this->session->set_flashdata('create','<div class="alert alert-success">Card Created Successfully.</div>');
 			$this->index();
 			$this->session->set_flashdata('create','');
@@ -87,6 +88,22 @@ class Cards extends CI_Controller
 		$name=$this->input->post('name');
 		$list=$this->session->userdata('list');
 		$this->session->set_userdata('card',$name);
-					
+		$a['result']=$this->l->get_lists($board);
+		$this->load->view('header');
+		$this->load->view('navigation');
+		$this->load->view('cards_2',$a);
+		$this->load->view('footer');	
+	}
+	function move()
+	{
+		$board=$this->session->userdata('board');	
+		$name=$this->input->post('name');
+		$card=$this->session->userdata('card');
+		$list=$card=$this->session->userdata('list');
+		$this->db->query("delete from cards where list='$list' and name='$card' and board='$board' ");
+		$this->db->query("insert into cards(name,list,board) values ('$card','$name','$board') ");
+		$this->session->set_flashdata('create','<div class="alert alert-success">Moved Successfully.</div>');
+		$this->index();
+		$this->session->set_flashdata('create','');
 	}
 }
